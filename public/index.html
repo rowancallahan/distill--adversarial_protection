@@ -1,0 +1,89 @@
+<!doctype html>
+<meta charset="utf-8">
+<script src="https://distill.pub/template.v1.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+<script type="text/front-matter">
+  title: "Article Title"
+  description: "Exploring and explaining adversarial examples"
+  authors:
+  - Rowan Callahan: http://rowancallahan.github.io
+  affiliations:
+  - Cornell University: http://g.co/brain
+</script>
+
+<dt-article>
+  <h1>Hello World</h1>
+  <h2>A description of the article</h2>
+  <dt-byline></dt-byline>
+  <p>This is the first paragraph of the article.</p>
+  <p> This is <d-math> \mu </d-math> the second paragraph of the article
+  in this part of the article I am going to talk about a lot of different things.
+  One of the things that I want ot talk about is how important it is to be able to type quickly. </p>
+  <p>We can also cite <dt-cite key="gregor2015draw"></dt-cite> external publications.</p>
+  <p id="value-simple"> testbox </p>
+  <div id="slider-simple"></div>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://unpkg.com/d3-simple-slider"></script>
+  <!--<script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script> --> 
+  
+  
+  <script>
+  // Simple
+  var data = [0, 0.005, 0.01, 0.015, 0.02, 0.025];
+
+  var sliderSimple = d3
+    .sliderBottom()
+    .min(d3.min(data))
+    .max(d3.max(data))
+    .width(300)
+    .tickFormat(d3.format('.2%'))
+    .ticks(5)
+    .default(0.015)
+    .on('onchange', val => {
+      d3.select('p#value-simple').text(d3.format('.2%')(val));
+    });
+
+  var gSimple = d3
+    .select('div#slider-simple')
+    .append('svg')
+    .attr('width', 500)
+    .attr('height', 100)
+    .append('g')
+    .attr('transform', 'translate(30,30)');
+
+  gSimple.call(sliderSimple);
+
+  d3.select('p#value-simple').text(d3.format('.2%')(sliderSimple.value()));
+  </script>
+
+  <p class="scatter-chart">test also</p>
+  <div id='magic-chart'></div> 
+  
+  <script src="https://d3js.org/d3-contour.v1.min.js"></script> 
+  <script src="examples/contour.js"></script>
+
+
+  <d-math block>
+        $$ X = \begin{bmatrix} X_1 \\ X_2 \\ \vdots \\ X_n \end{bmatrix}$$
+        $$ Y  \sim \mathcal{N}(\mu, \Sigma) $$
+  </d-math>
+
+
+</dt-article>
+
+<dt-appendix>
+</dt-appendix>
+
+<script type="text/bibliography">
+  @article{gregor2015draw,
+    title={DRAW: A recurrent neural network for image generation},
+    author={Gregor, Karol and Danihelka, Ivo and Graves, Alex and Rezende, Danilo Jimenez and Wierstra, Daan},
+    journal={arXivreprint arXiv:1502.04623},
+    year={2015},
+    url={https://arxiv.org/pdf/1502.04623.pdf}
+  }
+</script>
